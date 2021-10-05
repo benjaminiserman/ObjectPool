@@ -7,6 +7,9 @@ public class ObjectPool<T> where T : new()
 
 	public ObjectPool() {}
 
+	///<summary>
+	///Initialize the ObjectPool with a prexisting list of objects.
+	///</summary>
 	public ObjectPool(List<T> startingList)
 	{
 		inactiveObjects = startingList;
@@ -19,7 +22,10 @@ public class ObjectPool<T> where T : new()
 
 		return objectPulled;
 	}
-
+	
+	///<summary>
+	///Get an object from the object pool if available, otherwise create a new one using the default constructor.
+	///</summary>
 	public T Pop()
 	{
 		T objectPulled;
@@ -32,7 +38,10 @@ public class ObjectPool<T> where T : new()
 
 		return objectPulled;
 	}
-
+	
+	///<summary>
+	///Get an object from the object pool if available, otherwise create a new one using supplied function.
+	///</summary>
 	public T Pop(Func<T> creationFunction)
 	{
 		T objectPulled;
@@ -46,5 +55,9 @@ public class ObjectPool<T> where T : new()
 		return objectPulled;
 	}
 
+	///<summary>
+	///Return an object to the object pool. Make sure to clear it as necessary before returning it!
+	///No guarantees are made about the state of the object when popped.
+	///</summary>
 	public void Push(T objectPushed) => inactiveObjects.Add(objectPushed);
 }
